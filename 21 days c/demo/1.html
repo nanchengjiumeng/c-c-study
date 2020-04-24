@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .footer {
+      /*display: none;*/
+      position: fixed;
+      align-items: center;
+      justify-content: space-between;
+      display: flex;
+      bottom: 0;
+      padding-bottom: .1rem;
+      height: .75rem;
+      /*padding-top: .1rem;*/
+      background: #fff;
+      width: 100%;
+      max-width: 720px;
+      color: #fff;
+      z-index: 999;
+
+    }
+
+    .footer.env__browser {
+      text-align: center;
+      color: #0b2133;
+    }
+
+    .footer .cut {
+      font-size: .3rem;
+      font-weight: bold;
+      color: #FA2F5F;
+      font-family: Swiss921 BT;
+    }
+
+    .footer .pre {
+      height: 100%;
+      margin-left: .05rem;
+      display: flex;
+      align-items: center;
+      font-size: .12rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+      line-height: .12rem;
+    }
+
+    .footer .pre .price__number {
+      margin-left: .05rem;
+      font-size: .26rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+      letter-spacing: px;
+    }
+
+    .footer .price {
+      padding-left: .15rem;
+      display: flex;
+    }
+
+
+    .footer .original__box {
+      margin-left: .08rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: .12rem;
+      font-weight: 400;
+      color: rgba(250, 47, 95, 1);
+      line-height: .21rem;
+    }
+
+    .footer .original__box .original__title {
+      display: block;
+
+    }
+
+    .footer .original__box .original {
+      display: block;
+      text-decoration: line-through;
+      font-size: .12rem;
+      font-weight: bold;
+      color: rgba(255, 193, 208, 1);
+    }
+
+
+    .footer .price .top .cut {
+      font-size: .28rem;
+      font-family: "Swiss921 BT";
+      font-weight: normal;
+      color: rgba(255, 255, 255, 1);
+      line-height: 20px;
+    }
+
+    .footer .price .top .original {
+      margin-left: .05rem;
+      font-size: .12rem;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(157, 159, 217, 1);
+      line-height: .14rem;
+      /*text-decoration: line-through;*/
+    }
+
+    .footer .btn__buy {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 16px;
+      padding: .12rem .32rem;
+      background: rgba(255, 84, 124, 1);
+      border-radius: 24px;
+      font-size: .14rem;
+      line-height: .14rem;
+      font-family: NotoSansCJKsc-Medium;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 1);
+      z-index: 9;
+    }
+
+    .footer .icon__towords {
+      margin-left: 16px;
+      height: .32rem;
+      width: .82rem;
+      background: url("https://official-web.oss-cn-beijing.aliyuncs.com/towords/pages/202003/mgrammer/icon_towords.png") no-repeat;
+      background-size: contain;
+    }
+
+    .footer .timer {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: .21rem;
+      width: 100%;
+      /* background-color: #373858; */
+      z-index: 1;
+      top: -.2rem;
+      left: 0;
+      font-size: .12rem;
+      /*line-height: .2rem;*/
+      color: rgba(250, 47, 95, 1);
+      padding-left: .15rem;
+      padding-right: .15rem;
+      font-weight: 400;
+      background: rgba(255, 237, 241, 1);
+      text-align: center;
+    }
+
+    .footer .timer .bold {
+      margin-left: .04rem;
+      margin-right: .04rem;
+      font-size: .16rem;
+      font-weight: bold;
+      color: rgba(250, 47, 95, 1);
+    }
+
+    .btn__play {
+      height: .4rem;
+      background: rgba(255, 84, 124, 0);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 84, 124, 1);
+      color: red;
+      font-size: .16rem;
+      display: flex;
+      align-items: center;
+      padding-left: .06rem;
+      padding-right: .14rem;
+    }
+
+    .btn__play .text {
+      margin-left: 0.08rem;
+    }
+
+    .i__play {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: .28rem;
+      height: .28rem;
+      background: rgba(255, 84, 124, 1);
+      border-radius: 50%;
+    }
+
+    .i__play::after {
+      margin-left: .1rem;
+      display: block;
+      content: '';
+      border-top: .06rem solid transparent;
+      border-right: .08rem solid transparent;
+      border-bottom: .06rem solid transparent;
+      border-left: .08rem solid #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="footer" @click="handlePayBtn" v-else>
+    <div class="timer">
+      <span>距离</span>
+      <span class="bold">{{timer.h}}:00</span>
+      <span>结束还剩</span>
+      <span class="bold">{{timer.m}}</span>
+      <span>分</span>
+      <span class="bold">{{timer.s}}</span>
+      <span>秒</span>
+    </div>
+    <div class="trial__lesson">
+      <div class="btn__play">
+        <span class="i__play"></span>
+        <span class="text">免费试听</span>
+      </div>
+    </div>
+    <div class="btn__buy" id="pay__btn">
+      <div class="original__box">
+        <span class="original">原价 ¥188</span>
+      </div>
+      <div class="pre">
+        <span>预售价</span>
+        <span class="price_number price__number">¥178</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  ~function REMResize() {
+    var rate = 3.75, $html = document.querySelector('html'), width = $html.offsetWidth
+    width = width > 720 ? 720 : width < 320 ? 320 : width;
+    $html.style['fontSize'] = width / 3.75 + 'px';
+    window.onresize !== REMResize ? window.onresize = REMResize : '';
+    document.querySelector('#app').style['display'] = 'block'
+  }();
+</script>
